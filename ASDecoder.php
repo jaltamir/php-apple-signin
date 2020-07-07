@@ -23,7 +23,7 @@ class ASDecoder {
      * @param string $identityToken
      * @return object|null
      */
-    public static function getAppleSignInPayload(string $identityToken) : ?object
+    public static function getAppleSignInPayload(string $identityToken)
     {
         $identityPayload = self::decodeIdentityToken($identityToken);
         return new ASPayload($identityPayload);
@@ -35,7 +35,7 @@ class ASDecoder {
      * @param string $identityToken
      * @return object
      */
-    public static function decodeIdentityToken(string $identityToken) : object {
+    public static function decodeIdentityToken(string $identityToken) {
         $publicKeyKid = JWT::getPublicKeyKid($identityToken);
 
         $publicKeyData = self::fetchPublicKey($publicKeyKid);
@@ -86,7 +86,7 @@ class ASDecoder {
 class ASPayload {
     protected $_instance;
 
-    public function __construct(?object $instance) {
+    public function __construct($instance) {
         if(is_null($instance)) {
             throw new Exception('ASPayload received null instance.');
         }
